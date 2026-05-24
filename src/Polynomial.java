@@ -1,5 +1,11 @@
 import java.util.Arrays;
 
+import static constructor1.Polynomialc1.construirTermino;
+import static constructor1.Polynomialc1.obtenerSimbolo;
+import static constructor2.Polynomialc2.separarPorTrozos;
+import static constructor2.Polynomialc2.separarPorTrozos;
+import constructor2.Polynomialc2;
+
 public class Polynomial {
 
     private float[] coeficiente;
@@ -13,7 +19,13 @@ public class Polynomial {
     }
 
     public Polynomial(String s) {
-
+        // 1. Si el texto es exactamente "0", evitamos procesos y creamos el array con un cero
+        if (s.trim().equals("0")) {
+            this.coeficiente = new float[]{0};
+        } else {
+            // 2. Si no es cero, llamamos a tu método mágico de la otra carpeta
+            this.coeficiente = Polynomialc2.procesarPolinomio(s);
+        }
     }
 
     public float[] roots() {
@@ -35,6 +47,12 @@ public class Polynomial {
     
     @Override
     public boolean equals(Object o) {
+        if (o instanceof Polynomial) {
+            Polynomial otro = (Polynomial) o;
+
+            return this.toString().equals(otro.toString());
+        }
+
         return false;
     }
 
@@ -73,45 +91,5 @@ public class Polynomial {
         }
     }
 
-    private String obtenerSimbolo(float coef, boolean esPrimerPrint) {
-        if (coef > 0) {
-            if (esPrimerPrint) {
-                return "";
-            } else {
-                return " + ";
-            }
-        } else {
-            if (esPrimerPrint) {
-                return "-";
-            } else {
-                return " - ";
-            }
-        }
-    }
 
-    private String construirTermino(String simbolo, float valorAbs, int grado) {
-        int numeroInt = (int) valorAbs;
-
-        // Caso 1: Grados mayores que 1 (ej: 4x^3 o x^2)
-        if (grado > 1) {
-            String parteNumero = "";
-            if (numeroInt != 1) {
-                parteNumero = String.valueOf(numeroInt); // Si no es 1, guardamos el número (ej: "4")
-            }
-            return simbolo + parteNumero + "x^" + grado;
-        }
-
-        // Caso 2: Grado 1 (ej: 5x o x)
-        if (grado == 1) {
-            String parteNumero = "";
-            if (numeroInt != 1) {
-                parteNumero = String.valueOf(numeroInt); // Si no es 1, guardamos el número (ej: "5")
-            }
-            return simbolo + parteNumero + "x";
-        }
-
-        // Caso 3: Grado 0 (El número suelto del final, ej: 5)
-        // Aquí el 1 SÍ se pincha siempre, así que no necesitamos ningún if
-        return simbolo + numeroInt;
-    }
 }
