@@ -1,9 +1,7 @@
-import java.util.Arrays;
-
 import static constructor1.Polynomialc1.construirTermino;
 import static constructor1.Polynomialc1.obtenerSimbolo;
-import static constructor2.Polynomialc2.separarPorTrozos;
-import static constructor2.Polynomialc2.separarPorTrozos;
+import static sumas_c1_c2.Polynomialsumc1.sumarCoeficientes;
+
 import constructor2.Polynomialc2;
 
 public class Polynomial {
@@ -32,8 +30,12 @@ public class Polynomial {
         return null;
     }
 
+
+    // DENTRO DE LA CLASE POLYNOMIAL:
     public Polynomial add(Polynomial p) {
-       return null;
+        float[] nuevosCoeficientes = sumarCoeficientes(this.coeficiente, p.coeficiente);
+
+        return new Polynomial(nuevosCoeficientes);
     }
 
 
