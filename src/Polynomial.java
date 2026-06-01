@@ -1,5 +1,6 @@
 import static constructor1.Polynomialc1.construirTermino;
 import static constructor1.Polynomialc1.obtenerSimbolo;
+import static mul_c1.Polymonialmul.multiplicarCoeficientes;
 import static sumas_c1_c2.Polynomialsumc1.sumarCoeficientes;
 
 import constructor2.Polynomialc2;
@@ -38,9 +39,13 @@ public class Polynomial {
         return new Polynomial(nuevosCoeficientes);
     }
 
-
+    // DENTRO DE LA CLASE POLYNOMIAL:
     public Polynomial mult(Polynomial p2) {
-        return null;
+        // 1. Le mandamos los arrays al multiplicador de la otra carpeta
+        float[] nuevosCoeficientes = multiplicarCoeficientes(this.coeficiente, p2.coeficiente);
+
+        // 2. Devolvemos el nuevo Polinomio resultante
+        return new Polynomial(nuevosCoeficientes);
     }
 
     public Polynomial[] div(Polynomial p2) {
